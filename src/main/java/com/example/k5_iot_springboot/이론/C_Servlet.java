@@ -22,7 +22,7 @@ package com.example.k5_iot_springboot.이론;
             |
             | : URL 매핑(/hello 경로 >> HelloServlet 클래스)
             |
-        [ 서블릿 ] service() 호출 - doGet()/doPost() - 필요한 작업 수업
+        [ 서블릿 ] service() 호출 - doGet()/doPost() - 필요한 작업 수행
             |
         [ 서비스 | DAO | 리포지토리 | DB ] 비즈니스 로직, 데이터 접근
             |
@@ -43,10 +43,6 @@ package com.example.k5_iot_springboot.이론;
 
         >> 순수 서블릿의 불편함을 표준화/자동화해주는 프론트 컨트롤러 패턴의 구현이
             스프링 MVC의 DispatcherServlet
-
-
-
-
  */
 
 public class C_Servlet {
