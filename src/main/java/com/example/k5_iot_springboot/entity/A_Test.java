@@ -17,7 +17,7 @@ import lombok.Setter;
 //      - 생략 시 기본으로 클래스 이름이 테이블 명과 매핑
 //      - name 옵션 추가
 //          : 테이블명 지정
-@Table
+@Table(name = "test")
 @NoArgsConstructor
 @Getter
 @Setter
