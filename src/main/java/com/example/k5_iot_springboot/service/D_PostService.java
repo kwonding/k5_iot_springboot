@@ -7,14 +7,18 @@ import com.example.k5_iot_springboot.dto.D_Post.Response.PostListResponseDto;
 import com.example.k5_iot_springboot.dto.ResponseDto;
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 public interface D_PostService {
     ResponseDto<PostDetailResponseDto> createPost(@Valid PostCreateRequestDto dto);
 
     ResponseDto<PostDetailResponseDto> getPostById(Long id);
 
-    ResponseDto<PostListResponseDto> getAllPosts();
+    ResponseDto<List<PostListResponseDto>> getAllPosts();
 
     ResponseDto<PostDetailResponseDto> updatePost(Long id, @Valid PostUpdateRequestDto dto);
 
     ResponseDto<Void> deletePost(Long id);
+
+    ResponseDto<List<PostListResponseDto>> getPostsByAuthor(String author);
 }
