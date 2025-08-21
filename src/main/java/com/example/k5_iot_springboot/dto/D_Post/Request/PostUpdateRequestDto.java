@@ -1,4 +1,4 @@
-package com.example.k5_iot_springboot.dto.D_Post.Request;
+package com.example.k5_iot_springboot.dto.D_Post.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotBlank;

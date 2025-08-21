@@ -29,15 +29,14 @@ package com.example.k5_iot_springboot.이론;
             - URL: 어디에 요청할지
             - HTTP 메서드(Method): 어떤 종류의 요청인지
                 >> GET, POST, PUT, DELETE 등
-            - 헤더(Header): 추가 정보('클라이언트 정보', '응답 데이터에 대한 형식' 등)
+            - 헤더(Header): 추가 정보 ('클라이언트 정보', '응답 데이터에 대한 형식' 등)
             - 바디(Body): 데이터 (요청 시 전달할 데이터 - 주로 POST, PUT 에서 사용)
 
         2) 응답(Response)
             : 서버가 클라이언트에게 전달
             - 상태 코드(Status Code): '어떻게 되었는지' (200 OK, 404 NOT FOUND 등)
-            - 헤더(Header): 추가 정보('응답 데이터 형식' 등)
+            - 헤더(Header): 추가 정보 ('응답 데이터 형식' 등)
             - 바디(Body): 실제 내용 (HTML 파일, JSON 데이터 등)
- */
-
+*/
 public class A_HTTP01 {
 }

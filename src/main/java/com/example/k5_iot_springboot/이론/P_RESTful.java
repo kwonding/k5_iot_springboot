@@ -4,7 +4,7 @@ package com.example.k5_iot_springboot.이론;
 * === RESTful API ===
 *
 * 1. REST란?
-*   REpresentation State Transfer
+*   REpresentaion State Transfer
 *   : 자원(Resource)을 URI로 식별하고
 *   , HTTP 메서드를 이용해 해당 자원에 대한 행위를 정의하는 아키텍처 스타일
 *
@@ -24,10 +24,10 @@ package com.example.k5_iot_springboot.이론;
 * 3. RESTful API 베스트 프렉티스
 *
 * 1) 명사 사용 - 리소스명을 동사가 아닌 명사로 작성
-*   (O)  /users, /products, /carts, /meetings 등
+*   (O) /users, /products, /carts, /meetings 등
 *   (X) /getUsers, /matchMembers
 *
-* 2) 소문자 사용 - 대문자 금지 !
+* 2) 소문자 사용 - 대문자 금지!
 *   (O) /menus, /colors
 *   (X) /Menus, /Products
 *
@@ -45,17 +45,17 @@ package com.example.k5_iot_springboot.이론;
 *
 * +) 버저닝 사용 - API의 시작은 'api/v1' 형태 사용
 *
-* === Restful API 예시 ===
+* === RESTful API 예시 ===
 * 케이스1) 사용자/인증
 *   - 회원가입: POST /api/v1/auth/signup
 *   - 로그인: POST /api/v1/auth/login
 *   - 내 정보 조회: GET /api/v1/users/me (로그인 한 자신의 정보 조회)
-*   - 이메일 중복 체크: GET /api/v1/auth/check-email?email=xxx...)
+*   - 이메일 중복 체크: GET /api/v1/auth/check-email?email=XXX...)
 *
 * 케이스2) 쇼핑몰
 *   - 상품 목록: GET /api/v1/products
 *   - 상품 리뷰 조회: GET /api/v1/products/{productId}/reviews
-*   - 장바구니: GET /api/v1/users/me/cart (사용자 1인 당 장바구니는 1개 - 단수가능)
+*   - 장바구니: GET /api/v1/users/me/cart (사용자 1인 당 장바구니는 1개)
 *   - 주문 생성: POST /api/v1/orders
 *
 * 케이스3) 게시판

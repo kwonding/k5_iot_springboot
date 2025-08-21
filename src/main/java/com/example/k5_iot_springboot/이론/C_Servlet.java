@@ -20,7 +20,7 @@ package com.example.k5_iot_springboot.이론;
             |
         [ 웹 서버 / 서블릿 컨테이너 ] 톰캣, 제티 등
             |
-            | : URL 매핑(/hello 경로 >> HelloServlet 클래스)
+            | : URL 매핑 ("/hello" 경로 >> HelloServlet 클래스)
             |
         [ 서블릿 ] service() 호출 - doGet()/doPost() - 필요한 작업 수행
             |
@@ -38,12 +38,12 @@ package com.example.k5_iot_springboot.이론;
             service(): 매 요청마다 호출 >> 내부에서 doGet()/doPost() 등으로 분기
             destroy(): 컨테이너 종료 시 정리
 
-        2) 매핑(web.xml 또는 어노테이션@WebServlet)으로 어떤 URL이 어떤 서블릿으로 연결되는지 개발자가 명시
-        3) 순수 서블릿은 요청 파싱, 모델 구성, 뷰 랜더링을 개발자가 직접 처리 - 중복 코드 증가
+        2) 매핑(web.xml 또는 어노테이션 @WebServlet)으로 어떤 URL이 어떤 서블릿으로 연결되는지 개발자가 명시
+        3) 순수 서블릿은 요청 파싱, 모델 구성, 뷰 렌더링을 개발자가 직접 처리 - 중복 코드 증가
 
         >> 순수 서블릿의 불편함을 표준화/자동화해주는 프론트 컨트롤러 패턴의 구현이
             스프링 MVC의 DispatcherServlet
- */
+*/
 
 public class C_Servlet {
 }

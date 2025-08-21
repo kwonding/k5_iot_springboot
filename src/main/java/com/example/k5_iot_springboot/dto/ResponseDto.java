@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 
 @Data
-@NoArgsConstructor // 개발 편의성을 위해 final 대신
+@NoArgsConstructor
 @AllArgsConstructor(staticName = "set") // 모든 필드를 받는 생성자 + staticName 지정 (set 메서드 생성)
 public class ResponseDto<T> {
 
-    /**  요청 처리 결과 (성공: true, 실패: false) */
+    /** 요청 처리 결과 (성공: true, 실패: false) */
     private boolean success;
 
     /** 처리 결과에 대한 설명 메시지 */
@@ -27,10 +27,10 @@ public class ResponseDto<T> {
     //      >> Instant.now()
 
     /**
-    * 요청이 성공했을 때 응답 생성
-    * @param message 성공 메시지
-    * @param data 응답 데이터
-    * */
+     * 요청이 성공했을 때 응답 생성
+     * @param message 성공 메시지
+     * @param data 응답 데이터
+     * */
     public static <T> ResponseDto<T> setSuccess(String message, T data) {
         return ResponseDto.set(true, message, data);
     }
@@ -43,4 +43,12 @@ public class ResponseDto<T> {
         return ResponseDto.set(false, message, null);
     }
 
+    /**
+     * 요청이 실패했을 때 응답 생성 - 오버로딩
+     * @param message 실패 메시지
+     * @param data 에러 데이터
+     * */
+    public static <T> ResponseDto<T> setFailed(String message, T data) {
+        return ResponseDto.set(false, message, data);
+    }
 }

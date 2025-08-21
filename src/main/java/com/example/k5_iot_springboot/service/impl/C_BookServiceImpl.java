@@ -31,9 +31,8 @@ public class C_BookServiceImpl implements C_BookService {
             return ResponseDto.setSuccess("책이 생성되었습니다.", toResponse(savedBook));
 
         } catch (Exception e) {
-            return ResponseDto.setFailed("책 등록 중 문제가 발생하였습니다." + e.getMessage());
+            return ResponseDto.setFailed("책 등록 중 문제가 발생하였습니다: " + e.getMessage());
         }
-
     }
 
     @Override
@@ -57,7 +56,7 @@ public class C_BookServiceImpl implements C_BookService {
             return ResponseDto.setSuccess("SUCCESS", toResponse(book));
 
         } catch (Exception e) {
-            return ResponseDto.setFailed("책 조회 중 문제가 발생하였습니다." + e.getMessage());
+            return ResponseDto.setFailed("책 조회 중 문제가 발생하였습니다: " + e.getMessage());
         }
     }
 
@@ -74,7 +73,7 @@ public class C_BookServiceImpl implements C_BookService {
             return ResponseDto.setSuccess("SUCCESS", toResponse(saved));
 
         } catch (Exception e) {
-            return ResponseDto.setFailed("책 수정 중 문제가 발생하였습니다." + e.getMessage());
+            return ResponseDto.setFailed("책 수정 중 문제가 발생하였습니다: " + e.getMessage());
         }
     }
 
@@ -110,7 +109,7 @@ public class C_BookServiceImpl implements C_BookService {
                 .map(this::toResponse)
                 .collect(Collectors.toList());
 
-        return ResponseDto.setSuccess("SUCCESS", data);
+        return ResponseDto.setSuccess("SUCCESS", data) ;
     }
 
     @Override
@@ -131,7 +130,7 @@ public class C_BookServiceImpl implements C_BookService {
                 .map(this::toResponse)
                 .collect(Collectors.toList());
 
-        return ResponseDto.setSuccess("SUCCESS", data);
+        return ResponseDto.setSuccess("SUCCESS", data) ;
     }
 
     // 유틸 메서드 (Entity >> Response Dto)

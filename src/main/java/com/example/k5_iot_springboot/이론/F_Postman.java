@@ -7,6 +7,6 @@ package com.example.k5_iot_springboot.이론;
 //          , 프로세스에 대한 결과 확인 가능
 
 // https://www.postman.com/downloads/
-
+// : 사이트 접속 >> 운영체제에 맞는 시스템 설치 (로그인)
 public class F_Postman {
 }

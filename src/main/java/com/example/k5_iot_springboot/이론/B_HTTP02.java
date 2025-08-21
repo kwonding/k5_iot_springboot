@@ -7,7 +7,7 @@ package com.example.k5_iot_springboot.이론;
         3) PORT 번호: 하나의 IP에서 다양한 프로그램 서버를 구분
 
         4) TCP/IP: 신뢰성 있는 데이터 전송을 위한 통신 규약
-            - HTTP(웹 브라우저 통신)
+            - HTTP(웹 브라우징 전송)
             - FTP(파일 전송)
             - SMTP(이메일 전송)
 
@@ -20,7 +20,7 @@ package com.example.k5_iot_springboot.이론;
 
         1) GET(가져오기) - 서버로 부터 데이터를 가져올 것을 요청
         2) POST(생성하기) - 서버에 새로운 데이터를 저장
-        3) PUT(수정하기) - 서버의 기존 데이터 전체를 수정 (덮어쓰기)
+        3) PUT(수정하기) - 서버의 기존 데이터 전체를 수정
             cf) UPDATE
                 >> 서버의 기존 데이터의 일부를 수정
         4) DELETE(삭제하기) - 서버의 데이터를 삭제
@@ -37,19 +37,19 @@ package com.example.k5_iot_springboot.이론;
     : 요청에 대한 처리 결과를 숫자와 간단한 메시지로 알려줌
 
         1) 200
-            200 OK: 성공(요청한 작업 성공 - GET/PUT/DELETE)
+            200 OK: 성공 (요청한 작업 성공 - GET/PUT/DELETE)
             201 Created: 생성 성공 (새로운 데이터 생성 성공 - POST)
 
         2) 400 - 개발자가 처리해야 하는 문제
-            400 Bad Request: 잘못된 요청 (요청 데이터 누락 및 유효성 오류, 요청 메서드 오류)
-            401 Unauthorized: 인증 실패 (EX. 사원증 없이 회사 출입 금지, 카페 가입 없이 내용 확인 불가)
-            403 Forbidden: 권한 없음 (EX. 회사 내 보안 문서는 권한 없이 열람 불가, 카페 권한 없이는 글쓰기 불가)
+            400 Bad Request: 잘못된 요청 (요청 데이터 누락 및 유효성 오류 & 요청 메서드 오류)
+            401 Unauthorized: 인증 실패
+                (EX. 사원증 없이 회사 출입 금지, 카페 가입 없이 내용 확인 불가)
+            403 Forbidden: 권한 없음
+                (EX. 회사 내 보안 문서는 권한 없이 열람 불가, 카페 권한 없이는 글쓰기 불가)
             404 NOT FOUND: 요청 자체를 찾을 수 없음 (해당하는 요청이 아예 없음)
 
         3) 500 - 개발자가 해결할 수 없는 문제
             500 Internal Server Error: 서버 문제
-
- */
+*/
 public class B_HTTP02 {
-
 }

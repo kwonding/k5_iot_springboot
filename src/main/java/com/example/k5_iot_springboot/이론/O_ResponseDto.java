@@ -3,7 +3,7 @@ package com.example.k5_iot_springboot.이론;
 /*
     ResponseDto
     : Spring Boot API 응답을 일관성 있게 관리하는 DTO
-    - 응답 구조 내의 바디(Body)의 구조를 정의
+    - 응답 구조 내 바디(Body)의 구조를 정의
 
     사용 목적
     - 일관된 응답 포맷 유지: 프론트엔드가 응답을 쉽게 처리
@@ -13,9 +13,7 @@ package com.example.k5_iot_springboot.이론;
     cf) ResponseEntity
         : HTTP 응답 전체 구조를 일관성 있게 관리하는 클래스
         - 상태코드, 헤더, 바디 등을 포함
-
- */
-
+*/
 
 public class O_ResponseDto {
 }

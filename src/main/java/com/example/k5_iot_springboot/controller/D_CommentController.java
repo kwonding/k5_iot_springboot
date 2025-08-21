@@ -1,9 +1,9 @@
 package com.example.k5_iot_springboot.controller;
 
 import com.example.k5_iot_springboot.common.constants.ApiMappingPattern;
-import com.example.k5_iot_springboot.dto.D_Comment.Request.CommentCreateRequestDto;
-import com.example.k5_iot_springboot.dto.D_Comment.Request.CommentUpdateRequestDto;
-import com.example.k5_iot_springboot.dto.D_Comment.Response.CommentResponseDto;
+import com.example.k5_iot_springboot.dto.D_Comment.request.CommentCreateRequestDto;
+import com.example.k5_iot_springboot.dto.D_Comment.request.CommentUpdateRequestDto;
+import com.example.k5_iot_springboot.dto.D_Comment.response.CommentResponseDto;
 import com.example.k5_iot_springboot.dto.ResponseDto;
 import com.example.k5_iot_springboot.service.D_CommentService;
 import jakarta.validation.Valid;
@@ -15,7 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(ApiMappingPattern.Comments.ROOT)
+@RequestMapping(ApiMappingPattern.Comments.ROOT) // api/v1/posts/{postId}/comments
 @RequiredArgsConstructor
 @Validated
 public class D_CommentController {
@@ -25,7 +25,7 @@ public class D_CommentController {
     // [POST] /api/v1/posts/{postId}/comments
     @PostMapping
     public ResponseEntity<ResponseDto<CommentResponseDto>> createComment(
-            @PathVariable("postId") @Positive(message = "postId는 1이상의 정수여야 합니다.") Long postId,
+            @PathVariable("postId") @Positive(message = "postId는 1 이상의 정수여야 합니다.") Long postId,
             @Valid @RequestBody CommentCreateRequestDto dto
             ) {
         ResponseDto<CommentResponseDto> response = commentService.createComment(postId, dto);
@@ -47,15 +47,11 @@ public class D_CommentController {
     // 3) 댓글 삭제
     // [DELETE] /api/v1/posts/{postId}/comments/{commentId}
     @DeleteMapping(ApiMappingPattern.Comments.ID_ONLY)
-    public ResponseEntity<ResponseDto<CommentResponseDto>> deleteComment(
+    public ResponseEntity<ResponseDto<Void>> deleteComment(
             @PathVariable("postId") @Positive(message = "postId는 1 이상의 정수여야 합니다.") Long postId,
             @PathVariable("commentId") @Positive(message = "commentId는 1 이상의 정수여야 합니다.") Long commentId
-        ) {
-        ResponseDto<CommentResponseDto> response = commentService.deleteComment(postId, commentId);
+    ) {
+        ResponseDto<Void> response = commentService.deleteComment(postId, commentId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
-
-
-
 }

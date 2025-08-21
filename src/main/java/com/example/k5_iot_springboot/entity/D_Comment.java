@@ -16,14 +16,14 @@ public class D_Comment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false) // 자바
-    // - Comment : Post = N : 1 관계에서 'N' 쪽 매핑임을 설정
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    // - Comment : Post = N : 1 관계에서 'N'쪽 매핑임을 설정
     // - Lazy 설정으로 필요할 때만 게시글을 로딩
     // - optional = false: FK가 반드시 존재해야 함을 보장 (데이터 무결성)
-    @JoinColumn(name = "post_id", nullable = false) // DB
+    @JoinColumn(name = "post_id", nullable = false)
     // - 외래키 컬럼명 지정
     // - NOT NULL 제약조건 부여: FK 설정
-    private D_Post post; // 단수로 설정! D_Post에 mappedBy
+    private D_Post post;
 
     @Comment("댓글 내용")
     @Column(nullable = false, length = 1000)
@@ -43,8 +43,8 @@ public class D_Comment {
         return new D_Comment(content, commenter);
     }
 
-    // Post에서만 댓글이 세팅되도록 가시성 축소 (연관관계 일관성 유지)
-    void setPost (D_Post post) {
+    // Post에서만 댓글에 세팅되도록 가시성 축소 (연관관계 일관성 유지)
+    void setPost(D_Post post) {
         this.post = post;
     }
 

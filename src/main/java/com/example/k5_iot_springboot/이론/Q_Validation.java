@@ -1,7 +1,7 @@
 package com.example.k5_iot_springboot.이론;
 
 /*
-* === Spring Boot Validation(유효화, 유효성) ===
+* === Spring Boot Validation ===
 *
 * 1. Validation란?
 * : 유효성 검증
@@ -36,7 +36,7 @@ package com.example.k5_iot_springboot.이론;
 *   - 값이 null도 아니고, 빈 문자열도 아니고, 공백만 있는 경우도 아님
 *   - 문자열 필드 검증 시 가장 많이 사용!
 *
-* cf) NonNull 앞의 세 가지와 비교!!
+* cf) NonNull
 *   : Lombok 어노테이션
 *   - null 값이 아니어야 함!
 *   - 반드시 초기화가 이루어져야하기 때문에 @RequiredArgsConstructor와 주로 사용
@@ -53,7 +53,7 @@ package com.example.k5_iot_springboot.이론;
 *   - 이메일 형식 검증
 *
 * 7) @Pattern
-*   - 정규 표현식으로 직접 패턴 검증 (사용자 정의 무결성)
+*   - 정규표현식으로 직접 패턴 검증 (사용자 정의 무결성)
 *
 * 8) @Positive, @PositiveOrZero, @Negative, @NegativeOrZero
 *   - 양수, 음수만 허용 (0포함 여부 선택 가능)
@@ -63,6 +63,5 @@ package com.example.k5_iot_springboot.이론;
 *   - @Future: 예약일
 *   - @Past: 생년월일
 * */
-
 public class Q_Validation {
 }

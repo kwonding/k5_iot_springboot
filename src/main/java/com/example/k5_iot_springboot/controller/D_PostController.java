@@ -1,13 +1,16 @@
 package com.example.k5_iot_springboot.controller;
 
 import com.example.k5_iot_springboot.common.constants.ApiMappingPattern;
-import com.example.k5_iot_springboot.dto.D_Post.Request.PostCreateRequestDto;
-import com.example.k5_iot_springboot.dto.D_Post.Request.PostUpdateRequestDto;
-import com.example.k5_iot_springboot.dto.D_Post.Response.PostDetailResponseDto;
-import com.example.k5_iot_springboot.dto.D_Post.Response.PostListResponseDto;
+import com.example.k5_iot_springboot.dto.D_Post.request.PostCreateRequestDto;
+import com.example.k5_iot_springboot.dto.D_Post.request.PostUpdateRequestDto;
+import com.example.k5_iot_springboot.dto.D_Post.response.PostDetailResponseDto;
+import com.example.k5_iot_springboot.dto.D_Post.response.PostListResponseDto;
+import com.example.k5_iot_springboot.dto.D_Post.response.PostWithCommentCountResponseDto;
 import com.example.k5_iot_springboot.dto.ResponseDto;
 import com.example.k5_iot_springboot.service.D_PostService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +20,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(ApiMappingPattern.Posts.ROOT)
-@RequiredArgsConstructor // final / NonNull
+@RequestMapping(ApiMappingPattern.Posts.ROOT) // "/api/v1/posts"
+@RequiredArgsConstructor
 @Validated // 메서드 파라미터 검증 활성화
 public class D_PostController {
     private final D_PostService postService;
-
 
     // 1) 게시글 생성
     @PostMapping
@@ -30,7 +32,7 @@ public class D_PostController {
             @Valid @RequestBody PostCreateRequestDto dto
             // @Valid
             // : DTO 객체에 대한 검증을 수행하는 어노테이션
-            // - 사용자가 클라이언트로부터 전달한 데이터가 미리 정의된 규칙에 맞는지 확인 검증
+            // - 사용자가 클라이언트로부터 전달한 데이터가 미리 정의된 규칙에 맞는지 확인(검증)
             ) {
         ResponseDto<PostDetailResponseDto> response = postService.createPost(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -58,7 +60,7 @@ public class D_PostController {
     public ResponseEntity<ResponseDto<PostDetailResponseDto>> updatePost(
             @PathVariable Long postId,
             @Valid @RequestBody PostUpdateRequestDto dto
-        ) {
+            ) {
         ResponseDto<PostDetailResponseDto> response = postService.updatePost(postId, dto);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
@@ -71,17 +73,55 @@ public class D_PostController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    //====================================================================================//
+    // ================================================================== //
     // 6) 특정 작성자의 모든 게시글 조회
-    @GetMapping("/author/{author}")
-    public ResponseEntity<ResponseDto<List<PostListResponseDto>>> getPostsByAuthor (
-            @PathVariable String author
+    @GetMapping(ApiMappingPattern.Posts.BY_AUTHOR)
+    public ResponseEntity<ResponseDto<List<PostListResponseDto>>> getPostsByAuthor(
+            @PathVariable @NotBlank(message = "작성자(author)는 비어 있을 수 없습니다.") String author
     ) {
         ResponseDto<List<PostListResponseDto>> response = postService.getPostsByAuthor(author);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
     // 7) 특정 키워드로 제목 검색 조회
+    @GetMapping(ApiMappingPattern.Posts.SEARCH_BY_TITLE) // "api/v1/posts/search?keyword="
+    public ResponseEntity<ResponseDto<List<PostListResponseDto>>> searchPostsByTitle(
+            @RequestParam("keyword") @NotBlank(message = "검색 키워드는 비어 있을 수 없습니다.") String keyword
+    ) {
+        ResponseDto<List<PostListResponseDto>> response = postService.searchPostsByTitle(keyword);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 
     // 8) 댓글이 가장 많은 상위 5개의 게시글 조회
+    @GetMapping(ApiMappingPattern.Posts.TOP_BY_COMMENTS)
+    public ResponseEntity<ResponseDto<List<PostWithCommentCountResponseDto>>> getTop5PostsByComments() {
+        ResponseDto<List<PostWithCommentCountResponseDto>> response = postService.getTop5PostsByComments();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 
+    // 9) 특정 키워드를 포함하는 "댓글"이 달린 게시글 조회
+    // 요청값: 특정 키워드(검색값) - String
+    //      >> @RequestParam
+    // 응답값: 해당 키워드가 포함된 게시글들 - List<PostListResponseDto>
+    @GetMapping("/search-comment")
+    // ResponseEntity(body) >> ResponseDto(data) >> List<PostListResponseDto>
+    public ResponseEntity<ResponseDto<List<PostListResponseDto>>> searchPostsByCommentKeyword(
+            @RequestParam("keyword") @NotBlank(message = "검색 키워드는 비어 있을 수 없습니다.") String keyword
+    ) {
+        ResponseDto<List<PostListResponseDto>> response = postService.searchPostsByCommentKeyword(keyword);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // 10) 특정 작성자의 게시글 중, 댓글 수가 minCount 이상인 게시글 조회
+    @GetMapping("/author/{author}/min-comments")
+    public ResponseEntity<ResponseDto<List<PostWithCommentCountResponseDto>>> getAuthorPostsWithMinComments(
+            @PathVariable("author") @NotBlank(message = "작성자(author)는 비워 질 수 없습니다.") String author,
+            @RequestParam(name = "minCount", defaultValue = "1")
+            @PositiveOrZero(message = "minCount는 0 이상이어야 합니다.") int minCount
+    ) {
+        ResponseDto<List<PostWithCommentCountResponseDto>> response
+                = postService.getAuthorPostsWithMinComments(author, minCount);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }

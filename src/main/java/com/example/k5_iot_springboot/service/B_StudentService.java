@@ -7,15 +7,11 @@ import com.example.k5_iot_springboot.dto.B_Student.StudentUpdateRequestDto;
 import java.util.List;
 
 public interface B_StudentService {
-    StudentResponseDto createStudent(StudentCreateRequestDto requestDto);
-
+    StudentResponseDto createStudent(StudentCreateRequestDto student);
     List<StudentResponseDto> getAllStudents();
-
     StudentResponseDto getStudentById(Long id);
-
     StudentResponseDto updateStudent(Long id, StudentUpdateRequestDto requestDto);
-
     void deleteStudent(Long id);
 
-    List<StudentResponseDto> filterStudentByNames(String name);
+    List<StudentResponseDto> filterStudentsByName(String name);
 }

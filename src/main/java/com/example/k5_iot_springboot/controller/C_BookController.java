@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(ApiMappingPattern.Books.ROOT)
-@RequiredArgsConstructor // 생성자 주입
+@RequiredArgsConstructor
 public class C_BookController {
     private final C_BookService bookService;
 
@@ -28,10 +28,10 @@ public class C_BookController {
     @PostMapping
     public ResponseEntity<ResponseDto<BookResponseDto>> createBook(
             @RequestBody BookCreateRequestDto dto
-    ) {
+            ) {
         ResponseDto<BookResponseDto> result = bookService.createBook(dto);
         return ResponseEntity.ok(result);
-//        return ResponseEntity.ok(location).body(result);
+//        return ResponseEntity.created(location).body(result);
     }
 
     // 2) READ - 전체 책 조회
@@ -49,7 +49,7 @@ public class C_BookController {
     }
 
     // 4) UPDATE - 책 수정
-    @PutMapping(BOOK_BY_ID)
+    @PutMapping("/{id}")
     public ResponseEntity<ResponseDto<BookResponseDto>> updateBook(
             @PathVariable Long id,
             @RequestBody BookUpdateRequestDto dto
@@ -59,8 +59,8 @@ public class C_BookController {
     }
 
     // 5) DELETE - 책 삭제
-    @DeleteMapping(BOOK_BY_ID)
-    public ResponseEntity<ResponseDto<Void>> deleteBook (@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseDto<Void>> deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return ResponseEntity.noContent().build();
     }
@@ -81,9 +81,9 @@ public class C_BookController {
     // @PathVariable
     // : URI 경로의 일부를 변수로 인식해서 값으로 받음
     // - 고정된 리소스의 식별자를 전달할 때 사용
-    //      >> 값이 필수!!
+    //      >> 값이 필수!
     //      >> 리소스를 식별하는 역할이므로 RESTful API에서 많이 사용
-    //      >> enum 타입 값은 제한된 값에 사용
+    //      >> enum 타입 같은 제한된 값에 사용
 
     // 1) 제목에 특정 단어가 포함된 책 조회
     @GetMapping(BOOK_SEARCH_BY_TITLE) // "/search/title?keyword=자바"
@@ -104,11 +104,15 @@ public class C_BookController {
     @GetMapping("/category/{category}") // "/category/ESSAY"
     public ResponseEntity<ResponseDto<List<BookResponseDto>>> getBooksByCategory(
             @PathVariable C_Category category
-    ) {
+            ) {
         ResponseDto<List<BookResponseDto>> books = bookService.getBooksByCategory(category);
+
+//        return books.getMessage().equals("SUCCESS")
+//                ? ResponseEntity.status(HttpStatus.OK).body(books)
+//                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResponseDto.set(false, "에러", null));
+//
         return ResponseEntity
                 .status(books.getMessage().equals("SUCCESS") ? HttpStatus.OK : HttpStatus.BAD_REQUEST)
                 .body(books);
     }
-
 }

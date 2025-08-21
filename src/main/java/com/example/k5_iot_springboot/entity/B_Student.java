@@ -11,7 +11,8 @@ import lombok.Setter;
 @Table(name = "students", uniqueConstraints = {
         // 2) 복합 컬럼 제약
         //      : name + email 조합이 동일하면 저장 불가
-        @UniqueConstraint(columnNames = {"email", "name"})})
+        @UniqueConstraint(columnNames = {"email", "name"})
+})
 // name 옵션: 클래스명과 테이블명이 다를 경우 반드시 명시
 // cf) 클래스명 단수 명사, UpperCamelCase
 //     DB명 복수 명사, lower_snake_case
@@ -32,7 +33,7 @@ public class B_Student {
     private String email;
 
     public B_Student(String name, String email) {
-        this.name = name;
         this.email = email;
+        this.name = name;
     }
 }

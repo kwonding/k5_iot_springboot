@@ -1,6 +1,6 @@
 package com.example.k5_iot_springboot.common.constants;
 
-// URI 설계 패턴
+// URL 설계 패턴
 // : RESTful하게 API 경로를 규칙적으로 설계하는 것
 // - 각 Controller의 고유 경로를 지정
 public class ApiMappingPattern {
@@ -9,7 +9,6 @@ public class ApiMappingPattern {
     public static final String V1 = "/v1";
     public static final String BASE = API + V1;
 
-//    public static final String BOOK_API = "/api/v1/books";
     // == 1. 책(C_Book) == //
     public static final class Books {
         private Books() {}
@@ -25,12 +24,16 @@ public class ApiMappingPattern {
         public static final String ID_ONLY = "/{postId}";
 
         public static final String BY_ID = ROOT + "/{postId}";
+
+        public static final String BY_AUTHOR = "/author/{author}";
+        public static final String SEARCH_BY_TITLE = "/search";
+        public static final String TOP_BY_COMMENTS = "/top-comments";
     }
 
     // == 3. 댓글(D_Comment) == //
     /*
     * RESTful API 설계
-    * - 현재 구조) 댓글(Comment)이 게시글(Post) 엔티티에 포함 (1 : N의 관계)
+    * - 현재 구조) 댓글(Comment)가 게시글(Post) 엔티티에 포함 (1 : N의 관계)
     *
     * - 종속된 데이터에 대해 하위 리소스 표현을 사용
     *   : 댓글의 CRUD는 게시글 하위 리소스로 표현
@@ -44,6 +47,17 @@ public class ApiMappingPattern {
 
         public static final String ROOT = Posts.BY_ID + "/comments";
         public static final String ID_ONLY = "/{commentId}";
+
         public static final String BY_ID = ROOT + "/{commentId}";
     }
+
+    // == 4. 게시글(F_Board) == //
+    public static final class Boards {
+        private Boards() {}
+
+        public static final String ROOT = BASE + "/boards";
+        public static final String ID_ONLY = "/{boardId}";
+    }
+
+
 }

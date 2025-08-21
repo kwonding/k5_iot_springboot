@@ -1,8 +1,8 @@
 package com.example.k5_iot_springboot.service.impl;
 
-import com.example.k5_iot_springboot.dto.D_Comment.Request.CommentCreateRequestDto;
-import com.example.k5_iot_springboot.dto.D_Comment.Request.CommentUpdateRequestDto;
-import com.example.k5_iot_springboot.dto.D_Comment.Response.CommentResponseDto;
+import com.example.k5_iot_springboot.dto.D_Comment.request.CommentCreateRequestDto;
+import com.example.k5_iot_springboot.dto.D_Comment.request.CommentUpdateRequestDto;
+import com.example.k5_iot_springboot.dto.D_Comment.response.CommentResponseDto;
 import com.example.k5_iot_springboot.dto.ResponseDto;
 import com.example.k5_iot_springboot.entity.D_Comment;
 import com.example.k5_iot_springboot.entity.D_Post;
@@ -53,12 +53,11 @@ public class D_CommentServiceImpl implements D_CommentService {
 
     @Override
     @Transactional
-    public ResponseDto<CommentResponseDto> deleteComment(Long postId, Long commentId) {
+    public ResponseDto<Void> deleteComment(Long postId, Long commentId) {
         D_Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new EntityNotFoundException("해당 id의 댓글을 찾을 수 없습니다."));
 
         if (!comment.getPost().getId().equals(postId)) {
-            // 일치하지 않은 경우
             throw new IllegalArgumentException("해당 댓글이 게시글 내에 속해있지 않습니다.");
         }
 
@@ -66,7 +65,7 @@ public class D_CommentServiceImpl implements D_CommentService {
         D_Post post = comment.getPost();
         post.removeComment(comment);
 
-        // 필요 시 명시 가능 (중복 방지 - 주로 생략)
+        // 필요 시 명시 가능(중복 방지 - 주로 생략)
         // commentRepository.delete(comment);
 
         return ResponseDto.setSuccess("SUCCESS", null);
