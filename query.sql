@@ -91,3 +91,9 @@ CREATE TABLE IF NOT EXISTS `boards` (
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci
   COMMENT = '게시글';
+  
+  SELECT * FROM `boards`;
+  
+  USE k5_iot_springboot;
+  # 0822 (F_Board)
+  
