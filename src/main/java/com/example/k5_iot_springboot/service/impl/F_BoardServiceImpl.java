@@ -33,7 +33,7 @@ public class F_BoardServiceImpl implements F_BoardService {
         Sort sort = Sort.by("createdAt").descending(); // 기본 정렬: 최신순
         // >> 정렬 파라미터가 없거나, 전부 화이트리스트에서 무시된 경우 디폴트 정렬을 사용
 
-        if (sortParams != null & sortParams.length > 0) { // 빈 배열이 아닌 경우 (요소 1개 이상)
+        if (sortParams != null && sortParams.length > 0) { // 빈 배열이 아닌 경우 (요소 1개 이상)
             // 정렬 순서를 보장할 리스트 - 여러 정렬 기준을 저장 (순서 보장 필요!)
             List<Sort.Order> orders = new ArrayList<>();
             for (String p: sortParams) {
@@ -132,8 +132,8 @@ public class F_BoardServiceImpl implements F_BoardService {
     //      : count 쿼리 실행 X, 데이터 개수를 size + 1로 요청해서 다음 페이지 존재 여부만 판단
 
     @Override
-    public ResponseDto<BoardResponseDto.PageResponse> getBoardsPage(int page, int size, String[] sort) {
-        Pageable pageable = buildPageable(page, size, sort);
+    public ResponseDto<BoardResponseDto.PageResponse> getBoardsPage(Pageable pageable) {
+        // Pageable pageable = buildPageable(page, size, sort);
 
         // cf) Pageable 인터페이스
         //      : 페이징과 정렬 정보를 추상화한 인터페이스
