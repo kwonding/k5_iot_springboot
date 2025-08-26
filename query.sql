@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `boards` (
     CONSTRAINT `uk_users_login_id` UNIQUE (login_id),
     CONSTRAINT `uk_users_email` UNIQUE (email),
     CONSTRAINT `uk_users_nickname` UNIQUE (nickname),
-    CONSTRAINT `chk_users_gender` CHECK(gender IN ('MALE', 'FEMALE')) -- 자바 enum check 처리
+    CONSTRAINT `chk_users_gender` CHECK(gender IN ('MALE', 'FEMALE')) -- 자바 enum, check 처리
 ) ENGINE=InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci

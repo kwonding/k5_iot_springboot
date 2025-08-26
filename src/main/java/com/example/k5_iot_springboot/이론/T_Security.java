@@ -79,7 +79,7 @@ package com.example.k5_iot_springboot.이론;
         : 모든 요청(인증 정보 여부 상관 X)
         - 로그인 요청인지(UsernamePasswordAuthenticationFilter)
         - JWT 토큰(or 세션정보)이 있는지(JwtAuthenticationFilter, 커스텀 Filter에 전달)
-        - 보호된 URL인지?
+        - 보호된 URL 인지?
 
     3) AuthenticationManager/Provider - 신분 확인 부서
         : 로그인 시도(/login)가 들어오면, 필터가 아이디/비번을 요청에서 꺼냄
