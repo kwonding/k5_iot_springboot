@@ -94,6 +94,8 @@ CREATE TABLE IF NOT EXISTS `boards` (
   
   SELECT * FROM `boards`;
   
+# 0822 (G_User)
+-- 사용자 테이블
   CREATE TABLE IF NOT EXISTS `users` (
 	id BIGINT NOT NULL AUTO_INCREMENT,
     login_id VARCHAR(50) NOT NULL,
@@ -114,6 +116,30 @@ CREATE TABLE IF NOT EXISTS `boards` (
   COMMENT = '사용자';
   
   SELECT * FROM `users`;
+  DROP TABLE `users`;
+# 0827 (G_User_role)
+-- 사용자 권한 테이블
+CREATE TABLE IF NOT EXISTS `user_roles` (
+	user_id BIGINT NOT NULL,
+    role VARCHAR(30) NOT NULL,
+    
+    CONSTRAINT fk_user_roles_user
+		FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+	CONSTRAINT uk_user_roles UNIQUE (user_id, role),
+    
+    CONSTRAINT chk_user_roles_role CHECK (role IN ('USER', 'MANAGER', 'ADMIN'))
+) ENGINE=InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_ci
+  COMMENT = '사용자 권한';
+  
+  SELECT * FROM `user_roles`;
+  DROP TABLE `user_roles`;
+  # 샘플데이터 #
+  INSERT INTO user_roles (user_id, role)
+  VALUES (1, "ADMIN");
+  INSERT INTO user_roles (user_id, role)
+  VALUES (2, "USER");
   
   
   USE k5_iot_springboot;

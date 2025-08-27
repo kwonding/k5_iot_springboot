@@ -7,7 +7,6 @@ import com.example.k5_iot_springboot.dto.ResponseDto;
 import com.example.k5_iot_springboot.service.G_AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
