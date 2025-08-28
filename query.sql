@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
   COLLATE = utf8mb4_unicode_ci
   COMMENT = '기사글';
   
-  
+  SELECT * FROM articles;
   
   USE k5_iot_springboot;
   
