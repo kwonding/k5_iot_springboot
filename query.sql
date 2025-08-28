@@ -117,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `boards` (
   
   SELECT * FROM `users`;
   DROP TABLE `users`;
+
 # 0827 (G_User_role)
 -- 사용자 권한 테이블
 CREATE TABLE IF NOT EXISTS `user_roles` (
@@ -135,11 +136,30 @@ CREATE TABLE IF NOT EXISTS `user_roles` (
   
   SELECT * FROM `user_roles`;
   DROP TABLE `user_roles`;
+  
   # 샘플데이터 #
   INSERT INTO user_roles (user_id, role)
   VALUES (1, "ADMIN");
-  INSERT INTO user_roles (user_id, role)
-  VALUES (2, "USER");
+  
+# 0828 (H_Article)
+-- 기사 테이블
+CREATE TABLE IF NOT EXISTS `articles` (
+	id BIGINT AUTO_INCREMENT,
+    title VARCHAR(200) NOT NULL,
+    content LONGTEXT NOT NULL,
+    author_id BIGINT NOT NULL,
+    created_at DATETIME(6) NOT NULL,
+    updated_at DATETIME(6) NOT NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_articels_author
+		FOREIGN KEY (author_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
+) ENGINE=InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_ci
+  COMMENT = '기사글';
+  
   
   
   USE k5_iot_springboot;
