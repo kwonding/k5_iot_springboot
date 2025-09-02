@@ -41,7 +41,7 @@ public class I_OrderItem extends BaseTimeEntity {
     @Column(nullable = false)
     private int quantity;
 
-    void  setOrder(I_Order order) {
+    void setOrder(I_Order order) {
         this.order = order;
     }
 }
