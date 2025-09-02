@@ -29,7 +29,7 @@ public class OrderSummaryView {
     private String product_name;
     private Integer quantity;
     private Integer price;
-    private Integer total_price;
+    private Long total_price;
 
     @Column(name = "ordered_at")
     private LocalDateTime orderedAt;

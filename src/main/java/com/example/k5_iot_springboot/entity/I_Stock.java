@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +21,7 @@ public class I_Stock extends BaseTimeEntity {
     private Long id;
 
     @NotNull // 참조되는 값이 PK값이기 때문에 비워질 수 X
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false) // 제품 하나당 재고 데이터도 하나
     @JoinColumn(name = "product_id", nullable = false,
         foreignKey = @ForeignKey(name = "fk_stocks_product"))
     private I_Product product;
@@ -28,4 +29,14 @@ public class I_Stock extends BaseTimeEntity {
     @Min(0)
     @Column(nullable = false)
     private int quantity;
+
+    @Builder
+    private I_Stock(I_Product product, int quantity) {
+        this.product = product;
+        this.quantity = 0;                  // 재고 생성 시 - 수량 초기화는 0
+    }
+
+    public void  setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

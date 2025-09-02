@@ -292,7 +292,7 @@ SELECT
     p.name					AS product_name,
     oi.quantity				AS quantity,
     p.price					AS price,
-    (oi.quantity * p.price) AS total_price,
+    CAST((oi.quantity * p.price) AS SIGNED) AS total_price, -- BIGINT로 고정
     o.created_at			AS ordered_at
 FROM
 	orders o
@@ -305,8 +305,8 @@ SELECT
 	o.id						AS order_id,
     o.user_id					AS user_id,
     o.order_status				AS order_status,
-    SUM(oi.quantity * p.price)	AS order_total_amount,
-    SUM(oi.quantity)			AS order_total_qty,
+    CAST(SUM(oi.quantity * p.price) AS SIGNED)	AS order_total_amount,
+    CAST(SUM(oi.quantity) AS SIGNED)			AS order_total_qty,
     MIN(o.created_at)			AS ordered_at -- 가장 과거
 FROM
 	orders o
