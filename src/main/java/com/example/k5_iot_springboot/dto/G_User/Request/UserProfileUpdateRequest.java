@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record UserProfileUpdateRequest( // record는 불변값 private 제거
-                                        @NotBlank @Size(max = 50)
+        @NotBlank @Size(max = 50)
         String nickname,
-                                        Gender gender // 선택
+        Gender gender // 선택
 ) {}
