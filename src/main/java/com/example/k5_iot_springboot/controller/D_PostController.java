@@ -100,7 +100,7 @@ public class D_PostController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    // 9) 특정 키워드를 포함하는 "댓글"이 달린 게시글 조회
+    // 9) 특정 키워드를 포함하는 "댓글"이 달린 게시글 조회 "/api/v1/posts/search-comment"
     // 요청값: 특정 키워드(검색값) - String
     //      >> @RequestParam
     // 응답값: 해당 키워드가 포함된 게시글들 - List<PostListResponseDto>
