@@ -403,12 +403,16 @@ DELIMITER ;
   SELECT * FROM `order_items`;
   SELECT * FROM `order_logs`;
   
-  
-  
-  
-  
   USE k5_iot_springboot;
-  
-  
+
+-- 1021 notice
+CREATE TABLE notice (
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title TEXT NOT NULL,
+    author VARCHAR(100) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+SELECT * FROM notice;
   
   
