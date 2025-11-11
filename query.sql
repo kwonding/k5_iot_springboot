@@ -115,6 +115,14 @@ CREATE TABLE IF NOT EXISTS `boards` (
   COLLATE = utf8mb4_unicode_ci
   COMMENT = '사용자';
   
+INSERT INTO users (login_id, password, email, nickname, gender, created_at, updated_at)
+VALUES
+  ('user1', 'user1', 'user1@example.com', 'user1', 'MALE',   NOW(6), NOW(6)),
+  ('user2', 'user2', 'user2@example.com', 'user2', 'FEMALE', NOW(6), NOW(6)),
+  ('user3', 'user3', 'user3@example.com', 'user3', 'MALE',   NOW(6), NOW(6))
+ON DUPLICATE KEY UPDATE
+  updated_at = VALUES(updated_at);
+
   SELECT * FROM `users`;
   DROP TABLE `users`;
   
@@ -211,6 +219,16 @@ CREATE TABLE IF NOT EXISTS `articles` (
   COMMENT = '기사글';
   
   SELECT * FROM articles;
+  
+  INSERT INTO articles (title, content, author_id, created_at, updated_at)
+  VALUES
+	('기사 1', '기사 1의 내용', 1, NOW(6), NOW(6)),
+	('기사 2', '기사 2의 내용', 2, NOW(6), NOW(6)),
+	('기사 3', '기사 3의 내용', 1, NOW(6), NOW(6)),
+	('기사 4', '기사 4의 내용', 3, NOW(6), NOW(6)),
+	('기사 5', '기사 5의 내용', 2, NOW(6), NOW(6)),
+	('기사 6', '기사 6의 내용', 3, NOW(6), NOW(6)),
+	('기사 7', '기사 7의 내용', 3, NOW(6), NOW(6));
   
   -- 0901 (주문 관리 시스템)
   -- 트랜잭션, 트리거, 인덱스, 뷰 학습
@@ -406,9 +424,10 @@ DELIMITER ;
   USE k5_iot_springboot;
 
 -- 1021 notice
-CREATE TABLE notice (
+CREATE TABLE notice(
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    title TEXT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
     author VARCHAR(100) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );

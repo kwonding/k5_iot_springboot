@@ -83,6 +83,7 @@ dependencies {
 	// - 운영/스테이징 등 실제 MySQL 서버에 접속할 때 사용
 	// - H2와 동시에 classpath 에 있어도, 실제로는 프로필/설정에 따라 한쪽만 접속됨
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	implementation 'com.mysql:mysql-connector-j'
 
 	// === 테스트 의존성 === //
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
